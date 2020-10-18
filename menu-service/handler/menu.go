@@ -2,9 +2,11 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
+	"github.com/gorilla/context"
 	"github.com/imadedwisuryadinta/dts-microservice/menu-service/database"
 	"gorm.io/gorm"
 
@@ -33,6 +35,8 @@ func (handler *MenuHandler) AddMenu(w http.ResponseWriter, r *http.Request) {
 		utils.WrapAPIError(w, r, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	menu.Username = fmt.Sprintf("%v", context.Get(r, "user"))
 
 	err = menu.Insert(handler.Db)
 	if err != nil {

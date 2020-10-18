@@ -47,8 +47,8 @@ func main() {
 
 	router.Handle("/add-menu", authHandler.ValidateAdmin(menuHandler.AddMenu))
 	router.Handle("/menu", http.HandlerFunc(menuHandler.GetAllMenu))
-	fmt.Println("menu service listen on port : 8000")
-	log.Panic(http.ListenAndServe(":8000", router))
+	fmt.Println("menu service listen on port : 8001")
+	log.Panic(http.ListenAndServe(":8001", router))
 }
 
 func initDB(dbConfig config.Database) (*gorm.DB, error) {
